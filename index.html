@@ -1,0 +1,3452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>SR UNIVERSITY | Digital Voting System</title>
+
+<style>
+
+/* =========================================================
+   SR UNIVERSITY — PREMIUM COLLEGE VOTING SYSTEM
+   SINGLE HTML FILE
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    font-family:
+        Inter,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    color:#f7f4ea;
+
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(103,75,35,.42),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at 85% 20%,
+            rgba(32,83,73,.45),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 50% 100%,
+            rgba(96,57,29,.35),
+            transparent 35%
+        ),
+        #071512;
+
+    overflow-x:hidden;
+}
+
+/* =========================================================
+   LIQUID BACKGROUND
+========================================================= */
+
+body::before,
+body::after{
+    content:"";
+    position:fixed;
+    width:500px;
+    height:500px;
+    border-radius:50%;
+    filter:blur(80px);
+    opacity:.25;
+    pointer-events:none;
+    z-index:-2;
+}
+
+body::before{
+    background:#b58a48;
+    left:-180px;
+    top:20%;
+    animation:liquidOne 15s infinite alternate ease-in-out;
+}
+
+body::after{
+    background:#21806d;
+    right:-180px;
+    bottom:5%;
+    animation:liquidTwo 18s infinite alternate ease-in-out;
+}
+
+@keyframes liquidOne{
+    from{
+        transform:translate(0,0) scale(1);
+    }
+    to{
+        transform:translate(180px,-100px) scale(1.35);
+    }
+}
+
+@keyframes liquidTwo{
+    from{
+        transform:translate(0,0) scale(1);
+    }
+    to{
+        transform:translate(-180px,100px) scale(1.3);
+    }
+}
+
+/* =========================================================
+   INTRO SCREEN
+========================================================= */
+
+.intro{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(34,73,62,.55),
+            transparent 45%
+        ),
+        #06120f;
+
+    animation:introExit 1s ease 4s forwards;
+}
+
+.intro-content{
+    text-align:center;
+    animation:introReveal 2s cubic-bezier(.2,.8,.2,1);
+}
+
+.intro-line{
+    width:0;
+    height:1px;
+
+    background:linear-gradient(
+        90deg,
+        transparent,
+        #d9b66e,
+        transparent
+    );
+
+    margin:22px auto;
+
+    animation:lineGrow 1.5s ease .5s forwards;
+}
+
+.intro-small{
+    letter-spacing:8px;
+    color:#cdb77d;
+    font-size:12px;
+    margin-bottom:20px;
+}
+
+.intro-title{
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:clamp(55px,13vw,150px);
+    letter-spacing:16px;
+    font-weight:500;
+
+    background:
+        linear-gradient(
+            110deg,
+            #d9c083,
+            #fff7d9,
+            #a77b38,
+            #f3e4ad
+        );
+
+    -webkit-background-clip:text;
+    color:transparent;
+
+    text-shadow:
+        0 0 45px rgba(220,184,99,.16);
+}
+
+.intro-sub{
+    letter-spacing:6px;
+    font-size:13px;
+    color:#9db2a9;
+}
+
+@keyframes introReveal{
+    from{
+        opacity:0;
+        transform:translateY(40px) scale(.96);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+@keyframes lineGrow{
+    to{
+        width:320px;
+    }
+}
+
+@keyframes introExit{
+    0%{
+        opacity:1;
+        visibility:visible;
+    }
+
+    80%{
+        opacity:0;
+    }
+
+    100%{
+        opacity:0;
+        visibility:hidden;
+        pointer-events:none;
+    }
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header{
+    position:sticky;
+    top:0;
+    z-index:500;
+
+    background:
+        rgba(7,20,17,.64);
+
+    backdrop-filter:blur(22px);
+    -webkit-backdrop-filter:blur(22px);
+
+    border-bottom:1px solid rgba(214,185,113,.16);
+}
+
+.nav{
+    max-width:1250px;
+    margin:auto;
+
+    padding:15px 25px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:13px;
+}
+
+.brand-mark{
+    width:44px;
+    height:44px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(221,190,112,.24),
+            rgba(28,105,85,.35)
+        );
+
+    border:1px solid rgba(218,187,111,.25);
+
+    box-shadow:
+        inset 0 1px 1px rgba(255,255,255,.08),
+        0 10px 35px rgba(0,0,0,.25);
+
+    font-size:20px;
+}
+
+.brand-text strong{
+    display:block;
+    font-family:Georgia,serif;
+    letter-spacing:2px;
+}
+
+.brand-text span{
+    color:#8fa59c;
+    font-size:10px;
+    letter-spacing:2px;
+}
+
+.live{
+    display:flex;
+    align-items:center;
+    gap:7px;
+
+    color:#7ee4b8;
+    font-size:11px;
+    letter-spacing:1px;
+}
+
+.live-dot{
+    width:7px;
+    height:7px;
+    background:#61e6a7;
+    border-radius:50%;
+    box-shadow:0 0 14px #61e6a7;
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+    50%{
+        transform:scale(1.7);
+        opacity:.4;
+    }
+}
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+main{
+    width:min(1200px,92%);
+    margin:auto;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    min-height:620px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+}
+
+.hero-label{
+    color:#c7aa6a;
+    letter-spacing:5px;
+    font-size:11px;
+    margin-bottom:25px;
+}
+
+.hero h1{
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:clamp(45px,7vw,88px);
+    font-weight:500;
+    line-height:1.02;
+
+    max-width:950px;
+}
+
+.gold{
+    background:
+        linear-gradient(
+            100deg,
+            #a57b39,
+            #f6e9bc,
+            #c69a4e
+        );
+
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    max-width:700px;
+    margin-top:25px;
+
+    color:#99aea5;
+    line-height:1.8;
+    font-size:15px;
+}
+
+.hero-btns{
+    margin-top:35px;
+
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.btn{
+    border:none;
+    cursor:pointer;
+
+    padding:14px 25px;
+
+    border-radius:13px;
+
+    color:#fff;
+
+    font-weight:600;
+
+    transition:
+        transform .25s,
+        box-shadow .25s,
+        background .25s;
+
+    border:1px solid rgba(255,255,255,.1);
+
+    background:
+        rgba(255,255,255,.06);
+
+    backdrop-filter:blur(15px);
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+}
+
+.btn-gold{
+    background:
+        linear-gradient(
+            135deg,
+            #a47736,
+            #d6b267
+        );
+
+    color:#102018;
+
+    box-shadow:
+        0 12px 35px rgba(195,155,75,.2);
+}
+
+.btn-green{
+    background:
+        linear-gradient(
+            135deg,
+            #176a55,
+            #269879
+        );
+}
+
+/* =========================================================
+   GLASS
+========================================================= */
+
+.glass{
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.075),
+            rgba(255,255,255,.025)
+        );
+
+    border:1px solid rgba(220,194,126,.13);
+
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.05),
+        0 25px 80px rgba(0,0,0,.18);
+
+    border-radius:24px;
+}
+
+/* =========================================================
+   STUDENT DETAILS
+========================================================= */
+
+.student-section{
+    min-height:650px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:70px 0;
+
+    scroll-margin-top:80px;
+}
+
+.student-box{
+    width:min(550px,100%);
+
+    padding:42px;
+
+    text-align:center;
+
+    animation:studentReveal .8s ease;
+}
+
+.student-icon{
+    width:78px;
+    height:78px;
+
+    margin:0 auto 20px;
+
+    display:grid;
+    place-items:center;
+
+    border-radius:22px;
+
+    font-size:32px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(203,169,92,.2),
+            rgba(30,112,91,.2)
+        );
+
+    border:1px solid rgba(215,185,110,.2);
+}
+
+.student-box h2{
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:36px;
+    font-weight:500;
+}
+
+.student-box > p{
+    max-width:410px;
+
+    margin:12px auto 30px;
+
+    color:#829a90;
+
+    line-height:1.7;
+
+    font-size:13px;
+}
+
+.form-group{
+    text-align:left;
+    margin-bottom:18px;
+}
+
+.form-group label{
+    display:block;
+
+    color:#cbb77f;
+
+    font-size:11px;
+
+    letter-spacing:1.5px;
+
+    text-transform:uppercase;
+
+    margin-bottom:8px;
+}
+
+.form-group input,
+.form-group select{
+
+    width:100%;
+
+    padding:14px 16px;
+
+    border-radius:12px;
+
+    border:1px solid rgba(220,194,126,.16);
+
+    outline:none;
+
+    background:
+        rgba(255,255,255,.045);
+
+    color:#f7f4ea;
+
+    font-size:13px;
+
+    transition:.25s;
+}
+
+.form-group input::placeholder{
+    color:#657c73;
+}
+
+.form-group input:focus,
+.form-group select:focus{
+
+    border-color:#c8a75e;
+
+    box-shadow:
+        0 0 0 3px rgba(200,167,94,.08);
+
+    background:
+        rgba(255,255,255,.065);
+}
+
+.form-group select option{
+    background:#10231d;
+    color:white;
+}
+
+.proceed-btn{
+    width:100%;
+    margin-top:8px;
+}
+
+@keyframes studentReveal{
+
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* =========================================================
+   VOTING AREA
+========================================================= */
+
+#votingArea{
+    display:none;
+
+    animation:votingReveal .8s ease;
+}
+
+#votingArea.show{
+    display:block;
+}
+
+@keyframes votingReveal{
+
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* =========================================================
+   VOTER BADGE
+========================================================= */
+
+.voter-badge{
+
+    padding:18px 22px;
+
+    margin-bottom:25px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:15px;
+}
+
+.voter-name{
+    font-family:Georgia,serif;
+
+    color:#e2cc91;
+
+    font-size:18px;
+}
+
+.voter-details{
+    color:#718980;
+
+    font-size:11px;
+
+    margin-top:5px;
+}
+
+.verified{
+    color:#72dbad;
+
+    border:1px solid rgba(91,218,165,.2);
+
+    background:rgba(50,180,130,.07);
+
+    padding:9px 14px;
+
+    border-radius:30px;
+
+    font-size:10px;
+
+    white-space:nowrap;
+}
+
+/* =========================================================
+   STATS
+========================================================= */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.stat{
+    padding:23px;
+}
+
+.stat-label{
+    color:#899f96;
+    font-size:11px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+}
+
+.stat-number{
+    font-family:Georgia,serif;
+    font-size:34px;
+    margin-top:8px;
+    color:#ead8a8;
+}
+
+.stat-small{
+    margin-top:5px;
+    color:#698078;
+    font-size:11px;
+}
+
+/* =========================================================
+   ELECTION BAR
+========================================================= */
+
+.election{
+    padding:22px 25px;
+    margin-bottom:35px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+}
+
+.election h3{
+    font-family:Georgia,serif;
+    font-weight:500;
+}
+
+.election p{
+    color:#82988f;
+    font-size:12px;
+    margin-top:5px;
+}
+
+.election-status{
+    color:#72dbad;
+
+    border:1px solid rgba(91,218,165,.2);
+
+    background:rgba(50,180,130,.07);
+
+    padding:9px 14px;
+
+    border-radius:30px;
+
+    font-size:11px;
+}
+
+/* =========================================================
+   CANDIDATES
+========================================================= */
+
+.section-head{
+    margin:45px 0 20px;
+}
+
+.section-head h2{
+    font-family:Georgia,serif;
+    font-size:30px;
+    font-weight:500;
+}
+
+.section-head p{
+    color:#81968d;
+    font-size:13px;
+    margin-top:6px;
+}
+
+.candidates{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.candidate{
+    position:relative;
+    overflow:hidden;
+
+    padding:27px;
+
+    cursor:pointer;
+
+    transition:
+        transform .3s,
+        border .3s,
+        box-shadow .3s;
+}
+
+.candidate::before{
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+    height:180px;
+
+    border-radius:50%;
+
+    right:-90px;
+    top:-90px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(205,169,92,.14),
+            transparent 65%
+        );
+}
+
+.candidate:hover{
+
+    transform:translateY(-7px);
+
+    border-color:
+        rgba(220,190,108,.38);
+
+    box-shadow:
+        0 25px 60px rgba(0,0,0,.25);
+}
+
+.candidate.selected{
+
+    border-color:#caa65b;
+
+    box-shadow:
+        0 0 0 1px rgba(202,166,91,.2),
+        0 25px 70px rgba(180,135,60,.12);
+}
+
+.crown{
+
+    position:absolute;
+
+    top:18px;
+    right:18px;
+
+    color:#c8a75e;
+
+    opacity:0;
+
+    transition:.3s;
+}
+
+.candidate.selected .crown{
+    opacity:1;
+}
+
+.avatar{
+
+    width:75px;
+    height:75px;
+
+    border-radius:22px;
+
+    display:grid;
+    place-items:center;
+
+    font-size:30px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(203,169,92,.2),
+            rgba(30,112,91,.2)
+        );
+
+    border:1px solid rgba(215,185,110,.2);
+
+    margin-bottom:18px;
+}
+
+.candidate h3{
+
+    font-family:Georgia,serif;
+
+    font-size:23px;
+
+    font-weight:500;
+}
+
+.candidate-role{
+
+    color:#7f978e;
+
+    font-size:12px;
+
+    margin-top:5px;
+}
+
+.vote-area{
+    margin-top:25px;
+}
+
+.vote-bar{
+
+    height:6px;
+
+    background:#10251f;
+
+    border-radius:10px;
+
+    overflow:hidden;
+}
+
+.vote-fill{
+
+    height:100%;
+
+    width:0%;
+
+    border-radius:10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #9b7135,
+            #e1c274
+        );
+
+    transition:
+        width 1s cubic-bezier(.2,.8,.2,1);
+}
+
+.vote-info{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-top:8px;
+
+    color:#718980;
+
+    font-size:11px;
+}
+
+/* =========================================================
+   VOTE BUTTON
+========================================================= */
+
+.vote-button{
+
+    width:100%;
+
+    margin-top:20px;
+
+    padding:13px;
+
+    border-radius:12px;
+
+    border:1px solid rgba(207,175,96,.25);
+
+    background:
+        rgba(202,166,91,.07);
+
+    color:#dfc580;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:.25s;
+}
+
+.vote-button:hover{
+
+    background:#b58a46;
+
+    color:#101b16;
+}
+
+.vote-button.selected{
+
+    background:#1e795f;
+
+    color:#eafff6;
+
+    border-color:#46c394;
+}
+
+.vote-button:disabled{
+    opacity:.5;
+    cursor:not-allowed;
+}
+
+/* =========================================================
+   RECORD PANEL
+========================================================= */
+
+.record-panel{
+
+    margin-top:35px;
+
+    padding:25px;
+}
+
+.record-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:18px;
+}
+
+.record-header h3{
+
+    font-family:Georgia,serif;
+
+    font-weight:500;
+}
+
+.record-count{
+
+    color:#caaa64;
+
+    font-size:12px;
+}
+
+.record{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:14px 0;
+
+    border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.record:last-child{
+    border-bottom:0;
+}
+
+.record-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+}
+
+.record-icon{
+
+    width:36px;
+    height:36px;
+
+    display:grid;
+
+    place-items:center;
+
+    border-radius:10px;
+
+    background:rgba(205,171,94,.08);
+}
+
+.record-name{
+    font-size:13px;
+}
+
+.record-time{
+
+    color:#6e857c;
+
+    font-size:10px;
+}
+
+.record-status{
+
+    color:#67d6a4;
+
+    font-size:10px;
+}
+
+/* =========================================================
+   LIVE DISPLAY
+========================================================= */
+
+.display-section{
+    margin-top:50px;
+}
+
+.oled{
+
+    max-width:620px;
+
+    margin:auto;
+
+    padding:25px;
+
+    border-radius:18px;
+
+    background:#06100d;
+
+    border:8px solid #1d2925;
+
+    box-shadow:
+        inset 0 0 30px rgba(0,0,0,.8),
+        0 25px 70px rgba(0,0,0,.25);
+
+    font-family:"Courier New",monospace;
+
+    color:#70e5b1;
+
+    text-shadow:
+        0 0 12px rgba(112,229,177,.45);
+}
+
+.oled-top{
+
+    text-align:center;
+
+    font-size:12px;
+
+    letter-spacing:3px;
+
+    padding-bottom:12px;
+
+    border-bottom:1px solid #214438;
+}
+
+.oled-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:12px;
+
+    margin-top:20px;
+}
+
+.oled-item{
+
+    border:1px solid #18382e;
+
+    padding:15px;
+}
+
+.oled-item small{
+
+    display:block;
+
+    color:#477564;
+
+    margin-bottom:5px;
+}
+
+.oled-item strong{
+    font-size:25px;
+}
+
+.oled-total{
+
+    text-align:center;
+
+    margin-top:15px;
+}
+
+/* =========================================================
+   ARCHITECTURE
+========================================================= */
+
+.arch{
+
+    margin-top:55px;
+}
+
+.arch-flow{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+}
+
+.node{
+
+    padding:20px;
+
+    min-width:135px;
+
+    text-align:center;
+
+    border-radius:17px;
+
+    background:
+        rgba(255,255,255,.045);
+
+    border:
+        1px solid rgba(212,182,105,.15);
+
+    transition:.3s;
+}
+
+.node:hover{
+
+    transform:translateY(-5px);
+
+    border-color:#bd9950;
+}
+
+.node-icon{
+
+    font-size:25px;
+
+    margin-bottom:8px;
+}
+
+.node strong{
+
+    display:block;
+
+    font-family:Georgia,serif;
+
+    font-weight:500;
+}
+
+.node span{
+
+    display:block;
+
+    margin-top:5px;
+
+    color:#728980;
+
+    font-size:10px;
+}
+
+.arrow{
+
+    color:#bd9950;
+
+    font-size:24px;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+
+    margin-top:100px;
+
+    padding:45px 20px;
+
+    text-align:center;
+
+    border-top:
+        1px solid rgba(218,186,108,.1);
+
+    color:#71857d;
+}
+
+.footer-title{
+
+    font-family:Georgia,serif;
+
+    font-size:20px;
+
+    color:#d9c183;
+
+    margin-bottom:8px;
+}
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+
+    position:fixed;
+
+    left:50%;
+
+    bottom:30px;
+
+    transform:
+        translate(-50%,120px);
+
+    padding:15px 23px;
+
+    border-radius:14px;
+
+    background:
+        rgba(13,35,28,.92);
+
+    border:
+        1px solid rgba(105,220,169,.3);
+
+    color:#a9efd0;
+
+    backdrop-filter:blur(15px);
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.4);
+
+    transition:.45s;
+
+    z-index:5000;
+
+    font-size:13px;
+}
+
+.toast.show{
+
+    transform:
+        translate(-50%,0);
+}
+
+/* =========================================================
+   CONFIRMATION MODAL
+========================================================= */
+
+.modal{
+
+    position:fixed;
+
+    inset:0;
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:
+        rgba(0,0,0,.65);
+
+    backdrop-filter:blur(12px);
+
+    z-index:4000;
+
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+
+    width:min(460px,100%);
+
+    padding:35px;
+
+    text-align:center;
+
+    animation:modalIn .45s ease;
+}
+
+@keyframes modalIn{
+
+    from{
+        opacity:0;
+        transform:translateY(30px) scale(.95);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+.success-icon{
+
+    width:75px;
+    height:75px;
+
+    margin:auto;
+
+    display:grid;
+
+    place-items:center;
+
+    border-radius:50%;
+
+    font-size:32px;
+
+    color:#79e7b5;
+
+    border:1px solid rgba(101,220,170,.3);
+
+    background:rgba(70,200,145,.08);
+
+    box-shadow:
+        0 0 40px rgba(65,211,157,.1);
+}
+
+.modal h2{
+
+    margin-top:20px;
+
+    font-family:Georgia,serif;
+
+    font-weight:500;
+}
+
+.modal > .modal-box > p{
+
+    margin-top:10px;
+
+    color:#829a90;
+
+    line-height:1.7;
+}
+
+.modal-details{
+
+    margin:20px 0;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    background:rgba(255,255,255,.035);
+}
+
+.modal-details p{
+
+    color:#829a90;
+
+    font-size:12px;
+
+    margin:8px 0;
+}
+
+.modal-details strong{
+
+    color:#ddc17b;
+}
+
+.modal-actions{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:900px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .candidates{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:650px){
+
+    .nav{
+        padding:12px 15px;
+    }
+
+    .live{
+        display:none;
+    }
+
+    .hero{
+        min-height:540px;
+    }
+
+    .intro-title{
+        letter-spacing:7px;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .candidates{
+        grid-template-columns:1fr;
+    }
+
+    .election{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .arch-flow{
+        flex-direction:column;
+    }
+
+    .arrow{
+        transform:rotate(90deg);
+    }
+
+    .student-box{
+        padding:28px 20px;
+    }
+
+    .student-box h2{
+        font-size:30px;
+    }
+
+    .voter-badge{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+}
+
+@media(max-width:400px){
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:43px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =======================================================
+     INTRO
+======================================================== -->
+
+<div class="intro">
+
+    <div class="intro-content">
+
+        <div class="intro-small">
+            SRI RAMA UNIVERSITY
+        </div>
+
+        <div class="intro-title">
+            SR UNIVERSITY
+        </div>
+
+        <div class="intro-line"></div>
+
+        <div class="intro-sub">
+            DIGITAL CAMPUS ELECTION • 2026
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =======================================================
+     HEADER
+======================================================== -->
+
+<header>
+
+    <div class="nav">
+
+        <div class="brand">
+
+            <div class="brand-mark">
+                🗳️
+            </div>
+
+            <div class="brand-text">
+
+                <strong>SR UNIVERSITY</strong>
+
+                <span>
+                    STUDENT ELECTION SYSTEM
+                </span>
+
+            </div>
+
+        </div>
+
+        <div class="live">
+
+            <span class="live-dot"></span>
+
+            LIVE ELECTION
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- =======================================================
+     MAIN
+======================================================== -->
+
+<main>
+
+
+<!-- =======================================================
+     HERO
+======================================================== -->
+
+<section class="hero">
+
+    <div class="hero-label">
+        SR UNIVERSITY • STUDENT COUNCIL ELECTION
+    </div>
+
+    <h1>
+
+        Your Voice.<br>
+
+        Your <span class="gold">
+            Choice.
+        </span>
+
+    </h1>
+
+    <p>
+
+        A modern digital voting interface designed for
+        college elections. Enter your student details,
+        select your preferred candidate, confirm your choice,
+        and record your vote digitally.
+
+    </p>
+
+    <div class="hero-btns">
+
+        <button
+            class="btn btn-gold"
+            onclick="goToVerification()">
+
+            CAST YOUR VOTE
+
+        </button>
+
+        <button
+            class="btn"
+            onclick="document.getElementById('architecture').scrollIntoView({behavior:'smooth'})">
+
+            VIEW SYSTEM
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     STUDENT VERIFICATION
+======================================================== -->
+
+<section
+    class="student-section"
+    id="verification">
+
+    <div class="student-box glass">
+
+        <div class="student-icon">
+            🎓
+        </div>
+
+        <div class="hero-label">
+            STUDENT VERIFICATION
+        </div>
+
+        <h2>
+            Enter Your Details
+        </h2>
+
+        <p>
+            Please provide your student details before
+            proceeding to the digital campus election.
+        </p>
+
+
+        <form id="studentForm">
+
+            <div class="form-group">
+
+                <label for="studentName">
+                    Student Name
+                </label>
+
+                <input
+                    type="text"
+                    id="studentName"
+                    placeholder="Enter your full name"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="rollNumber">
+                    Roll Number
+                </label>
+
+                <input
+                    type="text"
+                    id="rollNumber"
+                    placeholder="Enter your roll number"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="department">
+                    Department
+                </label>
+
+                <select
+                    id="department"
+                    required>
+
+                    <option value="">
+                        Select your department
+                    </option>
+
+                    <option value="CSE">
+                        Computer Science & Engineering
+                    </option>
+
+                    <option value="CSE-AIML">
+                        CSE - Artificial Intelligence & Machine Learning
+                    </option>
+
+                    <option value="ECE">
+                        Electronics & Communication Engineering
+                    </option>
+
+                    <option value="EEE">
+                        Electrical & Electronics Engineering
+                    </option>
+
+                    <option value="MECH">
+                        Mechanical Engineering
+                    </option>
+
+                    <option value="CIVIL">
+                        Civil Engineering
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="year">
+                    Year of Study
+                </label>
+
+                <select
+                    id="year"
+                    required>
+
+                    <option value="">
+                        Select year
+                    </option>
+
+                    <option value="1st Year">
+                        1st Year
+                    </option>
+
+                    <option value="2nd Year">
+                        2nd Year
+                    </option>
+
+                    <option value="3rd Year">
+                        3rd Year
+                    </option>
+
+                    <option value="4th Year">
+                        4th Year
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="btn btn-gold proceed-btn">
+
+                PROCEED TO VOTE →
+
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- =======================================================
+     VOTING AREA
+======================================================== -->
+
+<section id="votingArea">
+
+
+    <!-- VERIFIED STUDENT -->
+
+    <div class="voter-badge glass">
+
+        <div>
+
+            <div
+                class="voter-name"
+                id="displayName">
+
+                Student Name
+
+            </div>
+
+            <div
+                class="voter-details"
+                id="displayDetails">
+
+                Roll Number • Department • Year
+
+            </div>
+
+        </div>
+
+        <div class="verified">
+
+            ✓ VERIFIED STUDENT
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         STATS
+    ===================================================== -->
+
+    <section class="stats">
+
+        <div class="glass stat">
+
+            <div class="stat-label">
+                Total Votes
+            </div>
+
+            <div
+                class="stat-number"
+                id="totalVotes">
+
+                0
+
+            </div>
+
+            <div class="stat-small">
+                Recorded digitally
+            </div>
+
+        </div>
+
+
+        <div class="glass stat">
+
+            <div class="stat-label">
+                Candidates
+            </div>
+
+            <div class="stat-number">
+                3
+            </div>
+
+            <div class="stat-small">
+                Student council
+            </div>
+
+        </div>
+
+
+        <div class="glass stat">
+
+            <div class="stat-label">
+                Election Status
+            </div>
+
+            <div
+                class="stat-number"
+                style="font-size:22px">
+
+                LIVE
+
+            </div>
+
+            <div class="stat-small">
+                Voting active
+            </div>
+
+        </div>
+
+
+        <div class="glass stat">
+
+            <div class="stat-label">
+                Security
+            </div>
+
+            <div
+                class="stat-number"
+                style="font-size:22px">
+
+                ACTIVE
+
+            </div>
+
+            <div class="stat-small">
+                Verification enabled
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         ELECTION BAR
+    ===================================================== -->
+
+    <section class="election glass">
+
+        <div>
+
+            <h3>
+                Student Council Election 2026
+            </h3>
+
+            <p>
+                Select one candidate and confirm your vote.
+            </p>
+
+        </div>
+
+        <div class="election-status">
+
+            ● VOTING OPEN
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CANDIDATES
+    ===================================================== -->
+
+    <section>
+
+        <div class="section-head">
+
+            <h2>
+                Choose Your Candidate
+            </h2>
+
+            <p>
+                Select one candidate to continue.
+            </p>
+
+        </div>
+
+
+        <div class="candidates">
+
+
+            <!--Madhu sudan reddy -->
+
+            <div
+                class="candidate glass"
+                data-candidate="Madhu sudan reddy">
+
+                <div class="crown">
+                    ♛
+                </div>
+
+                <div class="avatar">
+                    👨🏻‍🎓
+                </div>
+
+                <h3>
+                    Madhu sudan reddy
+                </h3>
+
+                <div class="candidate-role">
+                    Student Council President
+                </div>
+
+                <div class="vote-area">
+
+                    <div class="vote-bar">
+
+                        <div
+                            class="vote-fill"
+                            id="fillA"
+                            style="width:35%">
+
+                        </div>
+
+                    </div>
+
+                    <div class="vote-info">
+
+                        <span>
+                            Current Votes
+                        </span>
+
+                        <span id="percentageA">
+                            35%
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <button
+                    class="vote-button"
+                    onclick="selectCandidate(this)">
+
+                    VOTE FOR CANDIDATE
+
+                </button>
+
+            </div>
+
+
+            <!-- CANDIDATE 2 -->
+
+            <div
+                class="candidate glass"
+                data-candidate="Devendra Reddy">
+
+                <div class="crown">
+                    ♛
+                </div>
+
+                <div class="avatar">
+                    👩🏻‍🎓
+                </div>
+
+                <h3>
+                    Devendra Reddy
+                </h3>
+
+                <div class="candidate-role">
+                    Student Council President
+                </div>
+
+                <div class="vote-area">
+
+                    <div class="vote-bar">
+
+                        <div
+                            class="vote-fill"
+                            id="fillB"
+                            style="width:28%">
+
+                        </div>
+
+                    </div>
+
+                    <div class="vote-info">
+
+                        <span>
+                            Current Votes
+                        </span>
+
+                        <span id="percentageB">
+                            28%
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <button
+                    class="vote-button"
+                    onclick="selectCandidate(this)">
+
+                    VOTE FOR CANDIDATE
+
+                </button>
+
+            </div>
+
+
+            <!-- CANDIDATE 3 -->
+
+            <div
+                class="candidate glass"
+                data-candidate="Barath">
+
+                <div class="crown">
+                    ♛
+                </div>
+
+                <div class="avatar">
+                    🧑🏻‍🎓
+                </div>
+
+                <h3>
+                    Barath
+                </h3>
+
+                <div class="candidate-role">
+                    Student Council President
+                </div>
+
+                <div class="vote-area">
+
+                    <div class="vote-bar">
+
+                        <div
+                            class="vote-fill"
+                            id="fillC"
+                            style="width:37%">
+
+                        </div>
+
+                    </div>
+
+                    <div class="vote-info">
+
+                        <span>
+                            Current Votes
+                        </span>
+
+                        <span id="percentageC">
+                            37%
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <button
+                    class="vote-button"
+                    onclick="selectCandidate(this)">
+
+                    VOTE FOR CANDIDATE
+
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         VOTE RECORDS
+    ===================================================== -->
+
+    <section class="record-panel glass">
+
+        <div class="record-header">
+
+            <h3>
+                Recent Vote Activity
+            </h3>
+
+            <div
+                class="record-count"
+                id="recordCount">
+
+                0 RECORDS
+
+            </div>
+
+        </div>
+
+
+        <div id="recordList">
+
+            <div class="record">
+
+                <div class="record-left">
+
+                    <div class="record-icon">
+                        🗳️
+                    </div>
+
+                    <div>
+
+                        <div class="record-name">
+                            System ready
+                        </div>
+
+                        <div class="record-time">
+                            Waiting for votes
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="record-status">
+                    READY
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         LIVE DISPLAY
+    ===================================================== -->
+
+    <section class="display-section">
+
+        <div class="section-head">
+
+            <h2>
+                Live Election Display
+            </h2>
+
+            <p>
+                Digital election monitoring panel.
+            </p>
+
+        </div>
+
+
+        <div class="oled">
+
+            <div class="oled-top">
+
+                SR UNIVERSITY • ELECTION MONITOR
+
+            </div>
+
+
+            <div class="oled-grid">
+
+                <div class="oled-item">
+
+                    <small>
+                        TOTAL VOTES
+                    </small>
+
+                    <strong id="oledTotal">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="oled-item">
+
+                    <small>
+                        STATUS
+                    </small>
+
+                    <strong>
+                        LIVE
+                    </strong>
+
+                </div>
+
+
+                <div class="oled-item">
+
+                    <small>
+                        CANDIDATE A
+                    </small>
+
+                    <strong id="oledA">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="oled-item">
+
+                    <small>
+                        CANDIDATE B
+                    </small>
+
+                    <strong id="oledB">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="oled-total">
+
+                CANDIDATE C:
+                <span id="oledC">
+                    0
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+</section>
+
+
+<!-- =======================================================
+     SYSTEM ARCHITECTURE
+======================================================== -->
+
+<section
+    class="arch"
+    id="architecture">
+
+    <div class="section-head">
+
+        <h2>
+            System Architecture
+        </h2>
+
+        <p>
+            Complete digital voting workflow.
+        </p>
+
+    </div>
+
+
+    <div class="arch-flow">
+
+        <div class="node">
+
+            <div class="node-icon">
+                🎓
+            </div>
+
+            <strong>
+                Student
+            </strong>
+
+            <span>
+                Enters details
+            </span>
+
+        </div>
+
+
+        <div class="arrow">
+            →
+        </div>
+
+
+        <div class="node">
+
+            <div class="node-icon">
+                🔐
+            </div>
+
+            <strong>
+                Verification
+            </strong>
+
+            <span>
+                Validate student
+            </span>
+
+        </div>
+
+
+        <div class="arrow">
+            →
+        </div>
+
+
+        <div class="node">
+
+            <div class="node-icon">
+                👥
+            </div>
+
+            <strong>
+                Candidates
+            </strong>
+
+            <span>
+                Select candidate
+            </span>
+
+        </div>
+
+
+        <div class="arrow">
+            →
+        </div>
+
+
+        <div class="node">
+
+            <div class="node-icon">
+                🗳️
+            </div>
+
+            <strong>
+                Voting
+            </strong>
+
+            <span>
+                Confirm vote
+            </span>
+
+        </div>
+
+
+        <div class="arrow">
+            →
+        </div>
+
+
+        <div class="node">
+
+            <div class="node-icon">
+                💾
+            </div>
+
+            <strong>
+                Record
+            </strong>
+
+            <span>
+                Store result
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<!-- =======================================================
+     FOOTER
+======================================================== -->
+
+<footer>
+
+    <div class="footer-title">
+        SR UNIVERSITY
+    </div>
+
+    <p>
+        Digital Campus Election System • 2026
+    </p>
+
+    <p style="margin-top:8px;font-size:11px;">
+        Student Project Prototype
+    </p>
+
+</footer>
+
+
+<!-- =======================================================
+     CONFIRMATION MODAL
+======================================================== -->
+
+<div
+    class="modal"
+    id="voteModal">
+
+    <div class="modal-box glass">
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+        <h2>
+            Vote Recorded
+        </h2>
+
+        <p>
+            Please verify your selection before
+            final confirmation.
+        </p>
+
+
+        <div class="modal-details">
+
+            <p>
+                Candidate:
+                <strong id="modalCandidate">
+                    —
+                </strong>
+            </p>
+
+            <p>
+                Student:
+                <strong id="modalStudent">
+                    —
+                </strong>
+            </p>
+
+            <p>
+                Roll Number:
+                <strong id="modalRoll">
+                    —
+                </strong>
+            </p>
+
+            <p>
+                Department:
+                <strong id="modalDepartment">
+                    —
+                </strong>
+            </p>
+
+        </div>
+
+
+        <div class="modal-actions">
+
+            <button
+                class="btn"
+                onclick="cancelVote()">
+
+                CANCEL
+
+            </button>
+
+            <button
+                class="btn btn-green"
+                onclick="finalizeVote()">
+
+                CONFIRM VOTE
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =======================================================
+     TOAST
+======================================================== -->
+
+<div
+    class="toast"
+    id="toast">
+
+    Message
+
+</div>
+
+
+<script>
+
+/* =========================================================
+   DIGITAL VOTING SYSTEM
+========================================================= */
+
+let studentData = null;
+let selectedCandidate = null;
+let votingLocked = false;
+
+
+/* =========================================================
+   HERO → VERIFICATION
+========================================================= */
+
+function goToVerification(){
+
+    document
+        .getElementById("verification")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+}
+
+
+/* =========================================================
+   STUDENT FORM
+========================================================= */
+
+document
+.getElementById("studentForm")
+.addEventListener("submit",function(event){
+
+    event.preventDefault();
+
+
+    const name =
+        document
+        .getElementById("studentName")
+        .value
+        .trim();
+
+
+    const roll =
+        document
+        .getElementById("rollNumber")
+        .value
+        .trim();
+
+
+    const department =
+        document
+        .getElementById("department")
+        .value;
+
+
+    const year =
+        document
+        .getElementById("year")
+        .value;
+
+
+    if(
+        !name ||
+        !roll ||
+        !department ||
+        !year
+    ){
+
+        showToast(
+            "Please complete all student details."
+        );
+
+        return;
+
+    }
+
+
+    studentData = {
+
+        name:name,
+
+        roll:roll,
+
+        department:department,
+
+        year:year
+
+    };
+
+
+    /* Display student details */
+
+    document
+        .getElementById("displayName")
+        .textContent =
+        name;
+
+
+    document
+        .getElementById("displayDetails")
+        .textContent =
+        roll +
+        " • " +
+        department +
+        " • " +
+        year;
+
+
+    /* Show voting section */
+
+    document
+        .getElementById("votingArea")
+        .classList.add("show");
+
+
+    showToast(
+        "Student verified successfully."
+    );
+
+
+    setTimeout(function(){
+
+        document
+            .getElementById("votingArea")
+            .scrollIntoView({
+                behavior:"smooth"
+            });
+
+    },300);
+
+});
+
+
+/* =========================================================
+   SELECT CANDIDATE
+========================================================= */
+
+function selectCandidate(button){
+
+    if(votingLocked){
+
+        showToast(
+            "Voting has already been completed."
+        );
+
+        return;
+
+    }
+
+
+    if(!studentData){
+
+        showToast(
+            "Please enter your student details first."
+        );
+
+        return;
+
+    }
+
+
+    const card =
+        button.closest(".candidate");
+
+
+    selectedCandidate =
+        card.dataset.candidate;
+
+
+    /* Remove previous selection */
+
+    document
+        .querySelectorAll(".candidate")
+        .forEach(function(candidate){
+
+            candidate
+                .classList
+                .remove("selected");
+
+
+            const btn =
+                candidate
+                .querySelector(".vote-button");
+
+
+            if(btn){
+
+                btn
+                    .classList
+                    .remove("selected");
+
+                btn.textContent =
+                    "VOTE FOR CANDIDATE";
+
+            }
+
+        });
+
+
+    /* Select current candidate */
+
+    card.classList.add("selected");
+
+    button.classList.add("selected");
+
+    button.textContent =
+        "✓ SELECTED";
+
+
+    /* Open confirmation */
+
+    document
+        .getElementById("modalCandidate")
+        .textContent =
+        selectedCandidate;
+
+
+    document
+        .getElementById("modalStudent")
+        .textContent =
+        studentData.name;
+
+
+    document
+        .getElementById("modalRoll")
+        .textContent =
+        studentData.roll;
+
+
+    document
+        .getElementById("modalDepartment")
+        .textContent =
+        studentData.department;
+
+
+    document
+        .getElementById("voteModal")
+        .classList.add("show");
+
+}
+
+
+/* =========================================================
+   CANCEL VOTE
+========================================================= */
+
+function cancelVote(){
+
+    document
+        .getElementById("voteModal")
+        .classList
+        .remove("show");
+
+
+    document
+        .querySelectorAll(".candidate")
+        .forEach(function(candidate){
+
+            candidate
+                .classList
+                .remove("selected");
+
+
+            const button =
+                candidate
+                .querySelector(".vote-button");
+
+
+            if(button){
+
+                button
+                    .classList
+                    .remove("selected");
+
+                button.textContent =
+                    "VOTE FOR CANDIDATE";
+
+            }
+
+        });
+
+
+    selectedCandidate = null;
+
+
+    showToast(
+        "Vote selection cancelled."
+    );
+
+}
+
+
+/* =========================================================
+   FINALIZE VOTE
+========================================================= */
+
+function finalizeVote(){
+
+    if(
+        !studentData ||
+        !selectedCandidate
+    ){
+
+        showToast(
+            "Invalid voting session."
+        );
+
+        return;
+
+    }
+
+
+    /* Check if this roll number already voted */
+
+    const previousVotes =
+        JSON.parse(
+            localStorage.getItem(
+                "srUniversityVotes"
+            ) || "[]"
+        );
+
+
+    const alreadyVoted =
+        previousVotes.some(function(vote){
+
+            return vote.rollNumber ===
+                studentData.roll;
+
+        });
+
+
+    if(alreadyVoted){
+
+        document
+            .getElementById("voteModal")
+            .classList
+            .remove("show");
+
+
+        showToast(
+            "This student has already voted."
+        );
+
+        votingLocked = true;
+
+        lockVoting();
+
+        return;
+
+    }
+
+
+    /* Create vote record */
+
+    const vote = {
+
+        studentName:
+            studentData.name,
+
+        rollNumber:
+            studentData.roll,
+
+        department:
+            studentData.department,
+
+        year:
+            studentData.year,
+
+        candidate:
+            selectedCandidate,
+
+        time:
+            new Date().toLocaleString()
+
+    };
+
+
+    /* Store vote */
+
+    previousVotes.push(vote);
+
+
+    localStorage.setItem(
+        "srUniversityVotes",
+        JSON.stringify(previousVotes)
+    );
+
+
+    /* Update candidate count */
+
+    let candidateCounts =
+        JSON.parse(
+            localStorage.getItem(
+                "srCandidateCounts"
+            ) || "{}"
+        );
+
+
+    if(!candidateCounts[selectedCandidate]){
+
+        candidateCounts[selectedCandidate] = 0;
+
+    }
+
+
+    candidateCounts[selectedCandidate]++;
+
+
+    localStorage.setItem(
+        "srCandidateCounts",
+        JSON.stringify(candidateCounts)
+    );
+
+
+    /* Close modal */
+
+    document
+        .getElementById("voteModal")
+        .classList
+        .remove("show");
+
+
+    /* Lock */
+
+    votingLocked = true;
+
+
+    lockVoting();
+
+
+    /* Update interface */
+
+    updateDashboard();
+
+    addRecord(vote);
+
+
+    showToast(
+        "✓ Your vote has been recorded successfully."
+    );
+
+
+    /* Show final success after small delay */
+
+    setTimeout(function(){
+
+        showFinalSuccess(vote);
+
+    },600);
+
+}
+
+
+/* =========================================================
+   LOCK VOTING
+========================================================= */
+
+function lockVoting(){
+
+    document
+        .querySelectorAll(".vote-button")
+        .forEach(function(button){
+
+            button.disabled = true;
+
+            button.textContent =
+                "VOTE RECORDED";
+
+        });
+
+}
+
+
+/* =========================================================
+   FINAL SUCCESS MODAL
+========================================================= */
+
+function showFinalSuccess(vote){
+
+    document
+        .getElementById("modalCandidate")
+        .textContent =
+        vote.candidate;
+
+
+    document
+        .getElementById("modalStudent")
+        .textContent =
+        vote.studentName;
+
+
+    document
+        .getElementById("modalRoll")
+        .textContent =
+        vote.rollNumber;
+
+
+    document
+        .getElementById("modalDepartment")
+        .textContent =
+        vote.department;
+
+
+    document
+        .getElementById("voteModal")
+        .classList
+        .add("show");
+
+
+    const actions =
+        document
+        .querySelector(".modal-actions");
+
+
+    actions.innerHTML = `
+
+        <button
+            class="btn btn-green"
+            onclick="closeSuccess()">
+
+            DONE
+
+        </button>
+
+    `;
+
+
+    document
+        .querySelector(".modal-box h2")
+        .textContent =
+        "✓ Vote Successfully Recorded";
+
+
+    document
+        .querySelector(".modal-box > p")
+        .textContent =
+        "Your vote has been recorded in the digital voting system.";
+
+}
+
+
+/* =========================================================
+   CLOSE SUCCESS
+========================================================= */
+
+function closeSuccess(){
+
+    document
+        .getElementById("voteModal")
+        .classList
+        .remove("show");
+
+
+    showToast(
+        "Thank you for participating in the election."
+    );
+
+}
+
+
+/* =========================================================
+   UPDATE DASHBOARD
+========================================================= */
+
+function updateDashboard(){
+
+    const votes =
+        JSON.parse(
+            localStorage.getItem(
+                "srUniversityVotes"
+            ) || "[]"
+        );
+
+
+    const counts =
+        JSON.parse(
+            localStorage.getItem(
+                "srCandidateCounts"
+            ) || "{}"
+        );
+
+
+    /* Total votes */
+
+    document
+        .getElementById("totalVotes")
+        .textContent =
+        votes.length;
+
+
+    document
+        .getElementById("oledTotal")
+        .textContent =
+        votes.length;
+
+
+    /* Candidate counts */
+
+    const a =
+        counts["Candidate A"] || 0;
+
+    const b =
+        counts["Candidate B"] || 0;
+
+    const c =
+        counts["Candidate C"] || 0;
+
+
+    document
+        .getElementById("oledA")
+        .textContent =
+        a;
+
+
+    document
+        .getElementById("oledB")
+        .textContent =
+        b;
+
+
+    document
+        .getElementById("oledC")
+        .textContent =
+        c;
+
+
+    /* Percentages */
+
+    if(votes.length > 0){
+
+        const percentageA =
+            Math.round(
+                (a / votes.length) * 100
+            );
+
+
+        const percentageB =
+            Math.round(
+                (b / votes.length) * 100
+            );
+
+
+        const percentageC =
+            Math.round(
+                (c / votes.length) * 100
+            );
+
+
+        document
+            .getElementById("percentageA")
+            .textContent =
+            percentageA + "%";
+
+
+        document
+            .getElementById("percentageB")
+            .textContent =
+            percentageB + "%";
+
+
+        document
+            .getElementById("percentageC")
+            .textContent =
+            percentageC + "%";
+
+
+        document
+            .getElementById("fillA")
+            .style.width =
+            percentageA + "%";
+
+
+        document
+            .getElementById("fillB")
+            .style.width =
+            percentageB + "%";
+
+
+        document
+            .getElementById("fillC")
+            .style.width =
+            percentageC + "%";
+
+    }
+
+}
+
+
+/* =========================================================
+   ADD RECORD
+========================================================= */
+
+function addRecord(vote){
+
+    const list =
+        document
+        .getElementById("recordList");
+
+
+    const empty =
+        list.querySelector(".record");
+
+
+    if(
+        empty &&
+        empty
+        .querySelector(".record-name")
+        ?.textContent ===
+        "System ready"
+    ){
+
+        list.innerHTML = "";
+
+    }
+
+
+    const record =
+        document.createElement("div");
+
+
+    record.className =
+        "record";
+
+
+    record.innerHTML = `
+
+        <div class="record-left">
+
+            <div class="record-icon">
+                ✓
+            </div>
+
+            <div>
+
+                <div class="record-name">
+                    ${escapeHTML(vote.candidate)}
+                </div>
+
+                <div class="record-time">
+                    ${escapeHTML(vote.time)}
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="record-status">
+            RECORDED
+        </div>
+
+    `;
+
+
+    list.prepend(record);
+
+
+    updateRecordCount();
+
+}
+
+
+/* =========================================================
+   RECORD COUNT
+========================================================= */
+
+function updateRecordCount(){
+
+    const votes =
+        JSON.parse(
+            localStorage.getItem(
+                "srUniversityVotes"
+            ) || "[]"
+        );
+
+
+    document
+        .getElementById("recordCount")
+        .textContent =
+        votes.length +
+        " RECORD" +
+        (votes.length === 1 ? "" : "S");
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function showToast(message){
+
+    const toast =
+        document
+        .getElementById("toast");
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.add("show");
+
+
+    setTimeout(function(){
+
+        toast.classList.remove("show");
+
+    },3000);
+
+}
+
+
+/* =========================================================
+   SAFE HTML
+========================================================= */
+
+function escapeHTML(text){
+
+    return String(text)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================================
+   LOAD SAVED DATA
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        updateDashboard();
+
+        updateRecordCount();
+
+    }
+);
+
+</script>
+
+</body>
+</html>
